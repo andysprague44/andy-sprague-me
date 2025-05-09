@@ -23,29 +23,25 @@ const HeroSection = () => {
       
       <div className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="order-2 lg:order-1 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+          <div className="order-2 lg:order-1 animate-fade-in text-center lg:text-left" style={{ animationDelay: '0.2s' }}>
             <div className="space-y-6">
               <h2 className="text-lg md:text-xl font-medium text-primary">
                 <span className="inline-block animate-bounce" style={{animationDuration: '2s'}}>👋</span> Hello, I'm
               </h2>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-balance">
-                Andy<span className="relative">
-                  Sprague
+                Andy <span className="relative">Sprague
                   <span className="absolute -bottom-2 left-0 w-full h-2 bg-gradient-to-r from-accent to-primary"></span>
                 </span>
               </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gradient">
-                Web Designer & <span className="relative inline-block">Software 
-                <div className="absolute -top-1 -right-1 transform rotate-12">
-                  <Rocket className="h-5 w-5 text-accent" />
-                </div> Engineer</span>
+              <h2 className="text-xl md:text-xl lg:text-2xl font-bold text-gradient">
+                Product Engineer & Experience Builder
               </h2>
-              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-lg">
+              <p className="text-lg text-gray-700 dark:text-gray-300 max-w-lg mx-auto block text-center lg:text-left">
                 I build <span className="font-bold text-primary">exceptional</span> digital experiences that combine 
                 <span className="italic"> stunning design</span> with 
                 <span className="underline decoration-wavy decoration-accent underline-offset-4"> high-performance code</span>.
               </p>
-              <div className="pt-4 flex flex-wrap gap-4">
+              <div className="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start text-center lg:text-left">
                 <Button onClick={scrollToContact} size="lg" className="group rounded-full bg-gradient-to-r from-primary to-accent hover:shadow-lg hover:shadow-accent/20 transition-all">
                   Let's Talk 
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -69,7 +65,7 @@ const HeroSection = () => {
               }}>
                 {/* Replace with your actual profile photo */}
                 <img 
-                  src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=800&q=80" 
+                  src="/me.jpeg" 
                   alt="Profile Avatar" 
                   className="w-full h-full object-cover"
                   style={{ 
