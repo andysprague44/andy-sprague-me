@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const navItems = [
   { id: "home", label: "Home" },
@@ -13,7 +14,23 @@ const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // On mount or location change, scroll to section if state.scrollTo is set
+  useEffect(() => {
+    if (location.pathname === '/' && location.state && (location.state as any).scrollTo) {
+      const sectionId = (location.state as any).scrollTo;
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // wait for DOM
+    }
+    // eslint-disable-next-line
+  }, [location]);
+
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 20);
@@ -39,10 +56,15 @@ const Navbar = () => {
   }, []);
   
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: sectionId } });
       setMobileMenuOpen(false);
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        setMobileMenuOpen(false);
+      }
     }
   };
   
@@ -82,7 +104,7 @@ const Navbar = () => {
               aria-label={`Navigate to ${item.label} section`}
             >
               {item.label}
-              {activeSection === item.id && (
+              {location.pathname === '/' && activeSection === item.id && (
                 <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-primary to-accent rounded-full"></span>
               )}
             </a>
