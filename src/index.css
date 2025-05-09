@@ -105,6 +105,22 @@
   .text-balance {
     text-wrap: balance;
   }
+  
+  .glass {
+    @apply backdrop-blur-md bg-white/20 border border-white/10;
+  }
+  
+  .rounded-blob {
+    border-radius: 60% 40% 70% 30% / 30% 70% 30% 70%;
+  }
+  
+  .spinning {
+    animation: spin 10s linear infinite;
+  }
+  
+  .floating {
+    animation: float 3s ease-in-out infinite;
+  }
 }
 
 .text-gradient {
@@ -153,4 +169,68 @@
 
 .project-card:hover {
   transform: translateY(-5px);
+}
+
+/* Added animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-bg {
+  0%, 100% { background-size: 100% 100%; }
+  50% { background-size: 105% 105%; }
+}
+
+/* Create some fun decorative elements */
+.dot-pattern {
+  background-image: radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.wavy-underline {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: hsl(var(--accent));
+}
+
+.stripe-bg {
+  background: repeating-linear-gradient(
+    45deg,
+    hsl(var(--background)),
+    hsl(var(--background)) 10px,
+    hsl(var(--muted)) 10px,
+    hsl(var(--muted)) 20px
+  );
+}
+
+.rainbow-text {
+  animation: rainbow 8s linear infinite;
+  background-size: 200% auto;
+  background-image: linear-gradient(
+    to right, 
+    #ff5f6d, 
+    #ffc371, 
+    #45caff, 
+    #85ffbd,
+    #ff5f6d
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes rainbow { 
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
