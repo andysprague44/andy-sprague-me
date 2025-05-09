@@ -44,7 +44,7 @@ const Navbar = () => {
             scrollToSection('home');
           }}
         >
-          YourName<span className="text-accent">.</span>
+          AndySprague<span className="text-accent">.</span>
         </a>
         
         {/* Desktop Navigation */}

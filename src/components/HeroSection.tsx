@@ -19,7 +19,7 @@ const HeroSection = () => {
             <div className="space-y-6">
               <h2 className="text-lg md:text-xl font-medium text-primary">Hello, I'm</h2>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-balance">
-                Your Name
+                AndySprague
               </h1>
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gradient">
                 Web Designer & Software Engineer
