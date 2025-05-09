@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Star } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navItems = [
   { id: "home", label: "Home" },
@@ -61,9 +60,7 @@ const Navbar = () => {
           }}
         >
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
-            Andy<span className="relative">Sprague
-              <Star className="absolute -top-5 -right-6 h-4 w-4 text-accent opacity-80 group-hover:animate-spin transition-all" style={{ transformOrigin: 'center', animationDuration: '3s' }} />
-            </span>
+            AndySprague
           </span>
         </a>
         
