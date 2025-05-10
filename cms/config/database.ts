@@ -1,6 +1,7 @@
 import path from 'path';
 
-function getConnection(env: any, client: string) {
+export default ({ env }) => {
+  const client = env('DATABASE_CLIENT', 'sqlite');
   const connections = {
     mysql: {
       connection: {
@@ -26,31 +27,12 @@ function getConnection(env: any, client: string) {
       },
     },
   };
-  return connections[client];
-}
-
-export default ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
-  const connection = getConnection(env, client);
 
   return {
     connection: {
       client,
-      ...connection,
+      ...connections[client],
       acquireConnectionTimeout: env.int('DATABASE_CONNECTION_TIMEOUT', 60000),
-    },
-  };
-};
-
-module.exports = ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'sqlite');
-  const connection = getConnection(env, client);
-
-  return {
-    connection: {
-      client,
-      ...connection,
-      useNullAsDefault: true,
     },
   };
 };
