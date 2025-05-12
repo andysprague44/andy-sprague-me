@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { scrollToSectionOrNavigateHome } from '@/utils/navigation';
 
 const navItems = [
   { id: "home", label: "Home" },
@@ -56,16 +57,7 @@ const Navbar = () => {
   }, []);
   
   const scrollToSection = (sectionId: string) => {
-    if (location.pathname !== '/') {
-      navigate('/', { state: { scrollTo: sectionId } });
-      setMobileMenuOpen(false);
-    } else {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-        setMobileMenuOpen(false);
-      }
-    }
+    scrollToSectionOrNavigateHome(sectionId, location, navigate, setMobileMenuOpen);
   };
   
   return (

@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Twitter, Linkedin, Github } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import emailjs from 'emailjs-com';
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -22,19 +24,27 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // In a real application, you'd send this data to your backend
-    console.log('Form submitted:', formData);
-    
-    toast({
-      title: "Message sent!",
-      description: "Thanks for reaching out. I'll get back to you soon.",
-    });
-    
-    setFormData({ name: '', email: '', message: '' });
+  
+    try {
+      await emailjs.send(
+        'service_7y7eqq5',
+        'template_i3zgedk',
+        formData,
+        'YjS004-z4FVf9ytv3'
+      );
+      toast({
+        title: "Message sent!",
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('Error sending message:', error);
+      toast({
+        title: "Error",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    }
     setIsSubmitting(false);
   };
 
@@ -101,24 +111,14 @@ const ContactSection = () => {
             </div>
           </form>
           
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div>
-              <h4 className="font-bold mb-2">Email</h4>
-              <a href="mailto:youremail@example.com" className="text-primary hover:underline">
-                youremail@example.com
+          <div className="max-w-5xl mx-auto mt-8 mb-12 text-center">
+            <div className="flex justify-center gap-8">
+              <a href="https://www.linkedin.com/in/andy-sprague/" className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary text-xl">
+                <Linkedin className="w-8 h-8 mr-3" /> LinkedIn
               </a>
-            </div>
-            <div>
-              <h4 className="font-bold mb-2">Location</h4>
-              <p>San Francisco, CA</p>
-            </div>
-            <div>
-              <h4 className="font-bold mb-2">Social</h4>
-              <div className="flex justify-center gap-4">
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-primary">Twitter</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-primary">LinkedIn</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-primary">GitHub</a>
-              </div>
+              <a href="https://github.com/andysprague44" className="flex items-center text-gray-700 dark:text-gray-300 hover:text-primary text-xl">
+                <Github className="w-8 h-8 mr-3" /> GitHub
+              </a>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { ArrowLeft } from 'lucide-react';
 import { fetchArticleBySlug } from '@/api/article';
 import ReactMarkdown from 'react-markdown';
 import StrapiBlocksRenderer from "@/components/StrapiBlocksRenderer";
+import { scrollToSectionOrNavigateHome } from '@/utils/navigation';
 interface BlogPostType {
   id: number;
   title: string;
@@ -20,6 +21,8 @@ interface BlogPostType {
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -49,11 +52,13 @@ const BlogPost = () => {
       <Navbar />
       <main className="flex-grow pt-24">
         <div className="container mx-auto px-4 md:px-6 max-w-3xl">
-          <Button variant="ghost" asChild className="mb-6">
-            <Link to="/blog" className="flex items-center">
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to all posts
-            </Link>
+          <Button
+            variant="ghost"
+            className="mb-6 flex items-center"
+            onClick={() => scrollToSectionOrNavigateHome('blog', location, navigate)}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to all posts
           </Button>
 
           {loading && <div className="text-center py-10">Loading...</div>}
