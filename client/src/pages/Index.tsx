@@ -69,12 +69,22 @@ const Index = () => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <main className="flex-grow">
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <BlogSection />
-        <ContactSection />
-      </main>
+  <section id="hero">
+    <HeroSection />
+  </section>
+  <section id="about">
+    <AboutSection />
+  </section>
+  <section id="projects">
+    <ProjectsSection />
+  </section>
+  <section id="blog">
+    <BlogSection />
+  </section>
+  <section id="contact">
+    <ContactSection />
+  </section>
+</main>
       <Footer />
     </div>
   );
