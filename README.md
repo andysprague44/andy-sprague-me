@@ -1,5 +1,5 @@
 
-# Hosting strapi
+# Hosting strapi in AWS EC2
 
 Used guide here: 
 https://strapi.io/integrations/aws
@@ -21,7 +21,6 @@ sudo apt-get install -y nodejs
 sudo npm install -g npm@latest
 node -v
 npm -v
-
 git config --global user.name "Andy Sprague"
 git config --global user.name "andy.sprague44@gmail.com"
 cd ~
@@ -29,8 +28,19 @@ git clone https://github.com/andysprague44/andy-sprague-me.git
 cd andy-sprague-me/cms
 npm install
 NODE_ENV=production npm run build
-
+npm start
 ```
 
+TODO: pm2
 
+# "Publishing" in local mode
 
+Cheat code: use strapi locally and export the data as json, at dev time.
+
+How to do it:
+1. Run strapi locally and add your articles to it.
+2. Run the export script (which saves the data to client/src/strapi.json and copies the uploads folder to client/public/uploads):
+    ```
+    ./client/scripts/export_strapi_content.sh
+    ```
+3. Commit and push the changes to GitHub (to deploy to vercel).
