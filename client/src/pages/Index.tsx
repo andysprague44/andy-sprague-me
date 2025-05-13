@@ -75,9 +75,9 @@ const Index = () => {
   <section id="about">
     <AboutSection />
   </section>
-  <section id="projects">
+  {/* <section id="projects">
     <ProjectsSection />
-  </section>
+  </section> */}
   <section id="blog">
     <BlogSection />
   </section>

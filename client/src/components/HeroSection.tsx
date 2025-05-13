@@ -47,14 +47,13 @@ const HeroSection = () => {
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Button>
                 <Button variant="outline" size="lg" asChild className="rounded-full hover:border-accent border-2 transition-all">
-                  <a href="#projects">View My Work</a>
+                  <a href="#blog">Read My Blog</a>
                 </Button>
               </div>
             </div>
           </div>
           <div className="order-1 lg:order-2 flex justify-center lg:justify-end animate-fade-in" style={{ animationDelay: '0.4s' }}>
             <div className="relative w-64 h-64 md:w-80 md:h-80">
-              {/* Fun blob shape with gradient */}
               <div className="absolute inset-0 rounded-blob bg-gradient-to-tr from-primary via-accent to-primary animate-pulse" style={{ 
                 animationDuration: '10s',
                 borderRadius: '60% 40% 70% 30% / 30% 30% 70% 70%'
@@ -63,7 +62,6 @@ const HeroSection = () => {
               <div className="absolute inset-4 rounded-blob bg-white dark:bg-gray-900 flex items-center justify-center" style={{ 
                 borderRadius: '60% 40% 70% 30% / 30% 30% 70% 70%'
               }}>
-                {/* Replace with your actual profile photo */}
                 <img 
                   src="/me.jpeg" 
                   alt="Profile Avatar" 
