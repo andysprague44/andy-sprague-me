@@ -37,7 +37,7 @@ export async function fetchArticleBySlug(slug: string): Promise<any | null> {
     const token = import.meta.env.VITE_STRAPI_API_TOKEN;
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
     // Strapi filter query for slug
-    const res = await axios.get(`${strapiUrl}/api/articles?filters[slug][$eq]=${encodeURIComponent(slug)}`, { headers });
+    const res = await axios.get(`${strapiUrl}/api/articles?populate=*&filters[slug][$eq]=${encodeURIComponent(slug)}`, { headers });
     const item = res.data.data?.[0];
     if (!item) return null;
     let coverUrl = item.cover?.url;

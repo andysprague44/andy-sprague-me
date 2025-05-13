@@ -55,7 +55,7 @@ const BlogPost = () => {
           <Button
             variant="ghost"
             className="mb-6 flex items-center"
-            onClick={() => scrollToSectionOrNavigateHome('blog', location, navigate)}
+            onClick={() => navigate('/blog')}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to all posts

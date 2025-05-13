@@ -5,7 +5,7 @@ import glob
 
 # CONFIGURATION
 STRAPI_URL = 'http://localhost:1337/api/articles'  # Strapi API endpoint
-API_TOKEN = '592069712bcf6c160d1c86fa09d60f0899eacf5da45eddfdbc80319887c54866520f9c52b32750bb5a87fbaf4a6abe74a9360b987680726644baee2df12b514d655c2570387df55e18e6d7efb19e9fbaa4142416342f46fe748ba7f845e10fcd16fc665319bb8fa51702a15e0b6bfcc4a4bcde28d7fc6e1b0623a7b6a56d4204'
+API_TOKEN = 'ADD WRITE TOKEN HERE'
 MARKDOWN_DIR = 'wordpress-md-posts'  # Directory containing markdown files
 
 # Helper to slugify titles for slugs
@@ -40,7 +40,7 @@ if API_TOKEN:
 # Loop through markdown files and upload
 def main():
     md_files = glob.glob(os.path.join(MARKDOWN_DIR, '*.md'))
-    for md_file in md_files[:1]:
+    for md_file in md_files:
         title, description, content = parse_markdown_file(md_file)
         slug = slugify(title)
         # Prepare blocks for dynamic zone (assuming a 'markdown' component, update as needed)

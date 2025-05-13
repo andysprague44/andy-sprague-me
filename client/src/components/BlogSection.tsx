@@ -66,7 +66,7 @@ const BlogSection = () => {
               <Card className="blog-card h-full border-2 hover:border-primary/50 group-hover:border-primary">
                 <div className="h-48 overflow-hidden">
                   <img 
-                    src={article.cover?.url || 'https://via.placeholder.com/400x200?text=No+Image'}
+                    src={article.cover?.url || 'placeholder.svg'}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
