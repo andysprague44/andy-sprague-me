@@ -39,7 +39,7 @@ Cheat code: use strapi locally and export the data as json, at dev time.
 
 How to do it:
 1. Run strapi locally and add your articles to it.
-2. Run the export script (which saves the data to client/src/strapi.json and copies the uploads folder to client/public/uploads):
+2. With server still running, run the export script (which saves the data to client/src/strapi.json and copies the uploads folder to client/public/uploads):
     ```
     ./client/scripts/export_strapi_content.sh
     ```
