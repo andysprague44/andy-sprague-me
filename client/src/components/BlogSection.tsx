@@ -38,29 +38,30 @@ const BlogSection = () => {
   }, []);
 
   const scrollToIndex = useCallback((index: number) => {
-    if (carouselRef.current && articles.length > 0) {
-      const slideWidth = carouselRef.current.scrollWidth / articles.length;
+    if (carouselRef.current && carouselRef.current.children[index]) {
+      const target = carouselRef.current.children[index] as HTMLElement;
       carouselRef.current.scrollTo({
-        left: slideWidth * index,
+        left: target.offsetLeft,
         behavior: 'smooth'
       });
     }
-  }, [articles.length]);
+  }, []);
 
   const scrollPrev = useCallback(() => {
     if (currentIndex > 0) {
       setCurrentIndex(currentIndex - 1);
-      scrollToIndex(currentIndex - 1);
     }
-  }, [currentIndex, scrollToIndex]);
+  }, [currentIndex]);
 
   const scrollNext = useCallback(() => {
     if (currentIndex < articles.length - 1) {
       setCurrentIndex(currentIndex + 1);
-      scrollToIndex(currentIndex + 1);
     }
-  }, [currentIndex, articles.length, scrollToIndex]);
+  }, [currentIndex, articles.length]);
 
+  useEffect(() => {
+    scrollToIndex(currentIndex);
+  }, [currentIndex, scrollToIndex]);
 
   if (loading) {
     return <div className="text-center py-12">Loading articles...</div>;
@@ -81,10 +82,11 @@ const BlogSection = () => {
         </div>
         
         <div className="relative">
-          <div className="embla overflow-hidden">
+          <div className="embla">
             <div 
               ref={carouselRef}
-              className="embla__container flex gap-6 px-1 pb-4"
+              className="embla__container flex gap-6 px-1 pb-4 overflow-x-auto scroll-smooth w-full"
+              style={{ scrollBehavior: 'smooth' }}
             >
               {articles.map((article) => {
                 return (
