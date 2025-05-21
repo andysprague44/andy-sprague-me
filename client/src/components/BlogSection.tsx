@@ -3,29 +3,17 @@ import { useLocation } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import { fetchArticles } from '@/api/article';
-
-
-// Define type for Strapi Article
-interface StrapiArticle {
-  id: number;
-  title: string;
-  excerpt: string;
-  date: string;
-  slug: string;
-  cover?: {
-    url?: string;
-  };
-}
+import { getPosts } from '@/sanity/client';
+import { SanityDocument } from '@sanity/client';
+import { urlFor } from '@/sanity/client';
 
 const BlogSection = () => {
-  const [articles, setArticles] = useState<StrapiArticle[]>([]);
+  const [articles, setArticles] = useState<SanityDocument[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchArticles()
+    getPosts()
       .then(setArticles)
       .catch((err) => {
         setError('Failed to load articles.')
@@ -45,7 +33,7 @@ const BlogSection = () => {
   }
 
   // Sort articles by date descending (assume ISO 8601 date)
-  const sortedArticles = [...articles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const sortedArticles = [...articles].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
   const displayArticles = isBlogPage ? sortedArticles : sortedArticles.slice(0, 3);
 
   return (
@@ -62,19 +50,19 @@ const BlogSection = () => {
         )}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-1 pb-4">
           {displayArticles.map((article) => (
-            <a key={article.id} href={`/blog/${article.slug}`} className="block group" tabIndex={0} aria-label={`Read blog post: ${article.title}`}>
+            <a key={article.id} href={`/blog/${article.slug.current}`} className="block group" tabIndex={0} aria-label={`Read blog post: ${article.title}`}>
               <Card className="blog-card h-full border-2 hover:border-primary/50 group-hover:border-primary">
                 <div className="h-48 overflow-hidden">
                   <img 
-                    src={article.cover?.url || 'placeholder.svg'}
+                    src={urlFor(article.image).url()}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <CardContent className="p-6">
-                  <div className="text-sm text-primary mb-2">{article.date}</div>
+                  <div className="text-sm text-primary mb-2">{article.publishedAt}</div>
                   <h4 className="text-xl font-bold mb-3 line-clamp-2">{article.title}</h4>
-                  <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{article.excerpt}</p>
+                  {/* <p className="text-gray-700 dark:text-gray-300 mb-4 line-clamp-3">{article.excerpt}</p> */}
                 </CardContent>
               </Card>
             </a>

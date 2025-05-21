@@ -1,8 +1,8 @@
 {
-    "name": "bold-brush-monorepo",
+    "name": "andysprague-me",
     "private": true,
     "scripts": {
-        "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run develop\""
+        "dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix sanity-studio run develop\""
     },
     "devDependencies": {
         "concurrently": "^9.1.2"

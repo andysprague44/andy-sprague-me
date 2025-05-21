@@ -5,32 +5,24 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
-import { fetchArticleBySlug } from '@/api/article';
-import ReactMarkdown from 'react-markdown';
-import StrapiBlocksRenderer from "@/components/StrapiBlocksRenderer";
-import { scrollToSectionOrNavigateHome } from '@/utils/navigation';
-interface BlogPostType {
-  id: number;
-  title: string;
-  content: string;
-  blocks: any[];
-  publishedAt: string;
-  excerpt: string;
-  cover?: { url: string };
-}
+import { SanityDocument } from '@sanity/client';
+import { urlFor } from '@/sanity/client';
+import { getPost } from '@/sanity/client';
+import { PortableText } from '@portabletext/react';
+import { sanityPortableTextComponents } from '@/components/SanityPortableText';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const location = useLocation();
-  const [post, setPost] = useState<BlogPostType | null>(null);
+  const [post, setPost] = useState<SanityDocument | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadPost() {
       try {
-        const found = await fetchArticleBySlug(slug || '');
+        const found = await getPost(slug || '');
         if (!found) {
           setError('Blog post not found.');
         } else {
@@ -71,16 +63,16 @@ const BlogPost = () => {
                   Published on {new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(post.publishedAt))}
                 </p>
               </div>
-              {post.cover?.url && (
+              {post.image && (
                 <div className="aspect-video mb-8 rounded-lg overflow-hidden">
                   <img
-                    src={post.cover.url}
+                    src={urlFor(post.image).url()}
                     alt={post.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
               )}
-              <StrapiBlocksRenderer blocks={post.blocks} />
+              <PortableText value={post.body} components={sanityPortableTextComponents}/>
             </article>
           )}
         </div>

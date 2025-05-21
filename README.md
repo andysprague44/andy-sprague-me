@@ -44,3 +44,10 @@ How to do it:
     ./client/scripts/export_strapi_content.sh
     ```
 3. Commit and push the changes to GitHub (to deploy to vercel).
+
+
+## tmp
+
+```
+"dev": "concurrently \"npm --prefix client run dev\" \"npm --prefix server run develop\""
+```
